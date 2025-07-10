@@ -1,11 +1,11 @@
 import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'your-secret-key-goes-here'  # replace with a secure key in production
+SECRET_KEY = 'django-insecure-change-this-secret-key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -20,12 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Your app
-    'properties',
-
-    # Redis cache
-    'django_redis',
+    'django_redis',  # Added for Redis caching
+    'properties',    # Your app
 ]
 
 MIDDLEWARE = [
@@ -38,7 +34,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'alx-backend-caching_property_listings.urls'
+ROOT_URLCONF = 'alx_backend_caching_property_listings.urls'
 
 TEMPLATES = [
     {
@@ -56,27 +52,27 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'alx-backend-caching_property_listings.wsgi.application'
+WSGI_APPLICATION = 'alx_backend_caching_property_listings.wsgi.application'
 
-# ✅ PostgreSQL Database Configuration
+# PostgreSQL Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'property_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',        # Refers to the service name in docker-compose
+        'NAME': 'propertydb',
+        'USER': 'propertyuser',
+        'PASSWORD': 'propertypass',
+        'HOST': 'db',  # must match the docker-compose service name
         'PORT': '5432',
     }
 }
 
-# ✅ Redis Cache Configuration
+# Redis Cache
 CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }

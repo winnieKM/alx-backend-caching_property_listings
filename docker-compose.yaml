@@ -3,19 +3,24 @@ version: '3.9'
 services:
   db:
     image: postgres:latest
+    restart: always
     environment:
-      POSTGRES_DB: property_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: propertydb
+      POSTGRES_USER: propertyuser
+      POSTGRES_PASSWORD: propertypass
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   redis:
     image: redis:latest
+    restart: always
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
 
 volumes:
   postgres_data:
+  redis_data:
